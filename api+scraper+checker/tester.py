@@ -1,22 +1,19 @@
-from flask import Flask, jsonify
 import subprocess
 
-app = Flask(__name__)
 
-
-@app.route('/check_jaydon')
 def check_jaydon():
     process = subprocess.Popen(['scrapy', 'runspider', 'jaydonscraper.py'], stdout=subprocess.PIPE)
     output, error = process.communicate()
     output = output.decode('utf-8')
+    # print(output)
 
+    # print(output)
     if "True" in output:
-        result = {'jaydon': True}
+        result = True
     else:
-        result = {'jaydon': False}
+        result = False
 
     return result
 
 
-if __name__ == '__main__':
-    app.run()
+check_jaydon()

@@ -1,16 +1,18 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+import scrapy
+from flask import Flask, jsonify
+import subprocess
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def check_jaydon():
+    process = subprocess.Popen(['python', 'jaydonscraper.py'], stdout=subprocess.PIPE)
+    output, error = process.communicate()
+    output = output.decode('utf-8')
+    if "Found Jaydon!" in output:
+        result = {'jaydon': True}
+    else:
+        result = {'jaydon': False}
+    print(result)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+
+check_jaydon()

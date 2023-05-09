@@ -1,7 +1,7 @@
-
-#scrapy runspider jaydonscraper.py -o output.json
+# scrapy runspider jaydonscraper.py -o output.json
 
 import scrapy
+
 
 class CheesyHoursSpider(scrapy.Spider):
     name = "cheesy_hours"
@@ -16,10 +16,12 @@ class CheesyHoursSpider(scrapy.Spider):
     def parse(self, response):
 
         i = 0
+        x = 0
         student_ids = response.css("td:first-child::text").getall()
 
         for i in range(len(student_ids)):
-            if student_ids[i] == "225287":
+            if student_ids[i] == "226011":
+                x = 1
                 print("Found Jaydon!")
                 yield {
                     'jaydon': True
@@ -28,6 +30,8 @@ class CheesyHoursSpider(scrapy.Spider):
             else:
                 continue
 
-        yield {
-            'jaydon': False
-        }
+        if x == 0:
+            print("No Jaydon :'(")
+            yield {
+                'jaydon': False
+            }
